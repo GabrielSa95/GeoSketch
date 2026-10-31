@@ -4,9 +4,10 @@ A QGIS plugin that brings a simple, Google Earth-style workflow to drawing, meas
 and managing field geometries: no need to create a layer, pick a CRS, or toggle editing
 mode before you start. Formerly known as *Ferramentas Terra*.
 
-> **Status: not yet published.** This repository is being prepared for submission to the
-> [official QGIS Python Plugins Repository](https://plugins.qgis.org). See
-> "Project status & pending items" below before treating anything here as released.
+> **Status: first version in preparation for the official QGIS Plugins Repository.** The
+> source code is published here on GitHub; it has not yet been submitted to or approved on
+> [plugins.qgis.org](https://plugins.qgis.org). See "Project status & pending items" below
+> before treating this as a finished release.
 
 ## Features
 
@@ -100,11 +101,12 @@ This project has not yet been published. `email=`, `homepage=`, `repository=` an
 real values or real-world confirmation before submission to the official QGIS Python
 Plugins Repository:
 
-- `experimental=True` in `metadata.txt` should only flip to `False` once the manual
-  validation checklist (`ROTEIRO_VALIDACAO_MANUAL_v0.18.0.md`) has actually been run
-  against a real QGIS install — it has not been, in this audit (no QGIS install is
-  available in this development environment).
+- Manual validation on a real QGIS 3.44.15 install (`ROTEIRO_VALIDACAO_MANUAL_v0.18.0.md`)
+  has been performed and approved by the project author. `experimental=True` is still
+  kept as-is pending the remaining stability item below.
 - Independent verification on Linux/macOS (see "Requirements and compatibility" above).
+- The GitHub repository is currently private; it must be made public before submission
+  to the official QGIS Python Plugins Repository.
 
 See `releases/v0.18.0/RELATORIO_v0.18.0.md` for the full rebranding audit, including what
 changed, what was deliberately left unchanged for backward compatibility, and the

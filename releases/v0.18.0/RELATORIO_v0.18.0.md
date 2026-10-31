@@ -379,3 +379,41 @@ verde sem nenhuma modificação neles.
 9. Só depois de 1-8: seguir o processo oficial (conta OSGeo, envio do ZIP ao
    repositório, acompanhar validação de segurança e aprovação) - **não realizado nesta
    tarefa**, nem autorizado a ser realizado sem confirmação explícita do usuário.
+
+## Adendo 3 — Publicação no GitHub, origem do ícone e validação manual (mesma versão 0.18.0)
+
+Atualização registrada em 2026-10-31, cobrindo três pedidos de acompanhamento distintos
+do autor, ainda sem bump de versão (0.18.0 continua sendo a versão em preparação).
+
+**Repositório público criado.** `https://github.com/GabrielSa95/GeoSketch` existe,
+inicialmente privado. `email=`, `homepage=`, `repository=` e `tracker=` em
+`metadata.txt` foram preenchidos com dados reais do autor - resolve a pendência #4 e a
+parte de URLs da pendência #5 (falta só tornar o repositório público antes da submissão
+oficial, que exige um repositório **público**).
+
+**Origem do ícone oficial esclarecida.** O autor declarou que `geosketch.png` foi
+**gerado pelo ChatGPT, a seu pedido** - não é um recurso de terceiros obtido pronto na
+internet. Isso resolve a incerteza registrada no Adendo 1 ("a titularidade dos direitos
+sobre essa imagem é uma declaração do usuário, que não tenho meios técnicos de verificar
+de forma independente"): a origem agora está documentada (`DEVELOPMENT.md`, seção "Origem
+dos recursos visuais"), e o autor assume a responsabilidade pelos direitos de uso sobre
+conteúdo gerado por IA a seu pedido, como já constava na seção "Desenvolvimento e
+autoria" do `README.md`/`LEIAME.md` para o restante do projeto. O arquivo PNG e sua
+transparência RGBA não foram reprocessados nesta atualização.
+
+**Validação manual no QGIS 3.44.15: relatada e aprovada pelo autor.** Diferente das
+versões anteriores, esta etapa não contou com uma instalação real do QGIS neste
+ambiente de desenvolvimento - a validação foi executada pelo próprio autor,
+independentemente, e reportada como concluída e aprovada em 2026-10-31. Este relatório
+registra essa aprovação como informada pelo responsável do projeto, não como algo
+verificado diretamente por esta auditoria. `experimental=True` foi **mantido**
+(não alterado para `False`), por instrução explícita do autor, até que todos os demais
+requisitos de estabilidade - notadamente a verificação cross-platform (pendência #7,
+ainda em aberto) - sejam confirmados.
+
+### Pendências remanescentes após o Adendo 3
+- Tornar o repositório GitHub **público** (hoje privado) antes de qualquer submissão ao
+  repositório oficial do QGIS.
+- Verificação cross-platform (Linux/macOS) - segue não testada.
+- Decisão final sobre `experimental=False` - intencionalmente adiada pelo autor.
+- Itens 8 e 9 da lista consolidada acima continuam em aberto, sem alteração.

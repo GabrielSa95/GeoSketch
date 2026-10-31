@@ -1,7 +1,7 @@
 [general]
 name=GeoSketch
 qgisMinimumVersion=3.44
-description=Desenhe, meça e gerencie geometrias de propriedades rurais com praticidade, em um fluxo de trabalho inspirado no Google Earth, com salvamento automático em GeoPackage.
+description=Draw, measure and organize field geometries with a Google Earth-style workflow and automatic GeoPackage storage
 about=O GeoSketch é um complemento para QGIS desenvolvido para facilitar a criação, edição e organização de geometrias diretamente no mapa.
 
     Oferece ferramentas para criação de pontos, polígonos, caminhos e círculos, medição de áreas e distâncias, gerenciamento de estilos e operações de geoprocessamento.

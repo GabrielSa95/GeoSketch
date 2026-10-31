@@ -49,6 +49,19 @@ testam, com descoberta automática via `python -m unittest discover -s tests` ex
 de dentro de `earth_tools/`. Duplicá-los na raiz criaria duas cópias para manter
 sincronizadas sem benefício real.
 
+### Origem dos recursos visuais
+
+Os ícones SVG em `earth_tools/icons/` são de autoria própria do projeto (geometria
+simples, sem marcador de licença de terceiros). O ícone oficial do complemento
+(`earth_tools/icons/geosketch.png`, o "blob azul-turquesa") foi **gerado pelo ChatGPT, a
+pedido do autor (Gabriel Alberto)**, conforme declarado por ele em 2026-10-31. Não é um
+recurso de terceiros encontrado pronto na internet nem extraído de um banco de imagens -
+é conteúdo gerado por IA, comissionado pelo autor especificamente para este projeto. O
+arquivo original (`Blob azul-turquesa translúcido e brilhante.png`, na raiz, fora do
+pacote instalável) e sua transparência RGBA real devem ser preservados sem reprocessamento
+além do redimensionamento proporcional já documentado em
+`releases/v0.18.0/RELATORIO_v0.18.0.md`.
+
 ## Como gerar uma nova versão
 
 1. Decida a versão nova (`X.Y.Z`) e atualize `earth_tools/metadata.txt` (campo `version`
