@@ -1,0 +1,343 @@
+[general]
+name=GeoSketch
+qgisMinimumVersion=3.44
+description=Desenhe, meça e gerencie geometrias de propriedades rurais com praticidade, em um fluxo de trabalho inspirado no Google Earth, com salvamento automático em GeoPackage.
+about=O GeoSketch é um complemento para QGIS desenvolvido para facilitar a criação, edição e organização de geometrias diretamente no mapa.
+
+    Oferece ferramentas para criação de pontos, polígonos, caminhos e círculos, medição de áreas e distâncias, gerenciamento de estilos e operações de geoprocessamento.
+
+    Também disponibiliza validação de geometrias, exportação de mapas em PDF e PNG, além de importação e exportação de arquivos KML e KMZ.
+
+    Todos os dados são organizados e salvos automaticamente em um GeoPackage, com suporte à organização por pastas e subpastas.
+version=0.18.0
+author=Gabriel Alberto
+email=gabriel.alberto0818@gmail.com
+
+homepage=https://github.com/GabrielSa95/GeoSketch
+tracker=https://github.com/GabrielSa95/GeoSketch/issues
+repository=https://github.com/GabrielSa95/GeoSketch
+
+tags=vector,digitizing,measurement,survey,sketch,geoprocessing,buffer,validation,google-earth,placemark,polygon,geopackage
+category=Vector
+icon=icons/geosketch.png
+experimental=True
+deprecated=False
+
+changelog=0.18.0
+    - Rebranding: o complemento passa a se chamar GeoSketch (nome exibido
+      no Gerenciador de Complementos, na barra de ferramentas, no menu de
+      contexto - agora "GeoSketch" em vez de "Ferramentas Terra" - e em
+      todos os titulos de janela/caixas de mensagem). O identificador
+      interno do pacote (pasta earth_tools, classe EarthTools,
+      classFactory, objectName dos widgets Qt, CUSTOM_KEY gravado nas
+      camadas do GeoPackage e o grupo QSettings dos presets de estilo)
+      foi mantido de propósito, por compatibilidade - só o texto exibido
+      ao usuario mudou, nao a estrutura de dados nem a identificacao
+      interna de "isto e um lugar deste plugin".
+    - Calculadora de area e distancia e Gerenciador de Estilos perdem o
+      icone/entrada na barra e no menu Vetor - continuam acessiveis
+      integralmente (mesma logica, callbacks e parametros de antes) pelo
+      menu de contexto da camada, dentro do submenu GeoSketch
+      ("Calcular medidas...", "Estilo...").
+    - Preparacao para publicacao no repositorio oficial de plugins do
+      QGIS: metadata.txt revisado (descricao/about traduzidos para
+      ingles, categoria e tags revisadas; campos de autor/contato/URLs
+      marcados como pendentes - nao preenchidos com dados inventados),
+      README.md (ingles) e LICENSE (GPL-2.0-or-later) adicionados na
+      raiz do projeto.
+    - Icone oficial configurado (icon=icons/geosketch.png, ao inves do
+      placemark.svg generico); description/about retraduzidos para
+      portugues (idioma principal da documentacao); author=Gabriel
+      Alberto; qgisMinimumVersion ajustado de 3.22 para 3.44 (unica
+      versao com teste empirico real confirmado no historico deste
+      projeto - nao declarar compatibilidade nao comprovada); tags
+      normalizadas (minusculas, hifenizadas); secao "Desenvolvimento e
+      autoria" adicionada ao README.md e ao LEIAME.md, deixando claro
+      que ferramentas de IA foram usadas como apoio ao desenvolvimento,
+      nunca como autoras do complemento; README.md e LICENSE agora
+      tambem copiados para dentro de earth_tools/, para acompanhar o
+      pacote instalavel (exigencia do repositorio oficial do QGIS).
+      email/homepage/repository/tracker preenchidos com o repositorio
+      publico do projeto (https://github.com/GabrielSa95/GeoSketch) na
+      preparacao para publicacao.
+    0.17.1
+    - Ajuste pontual: o submenu "Adicionar" do menu de contexto da camada
+      (Pasta, Modelo de propriedade rural, Marcador de local, Caminho,
+      Poligono, Sobreposicao de imagem) aparecia como 5-6 entradas de topo
+      SEPARADAS, todas com o nome "Adicionar" repetido, em vez de um unico
+      submenu com as 6 opcoes dentro - causa raiz: cada acao era
+      registrada com uma chamada propria a
+      addCustomActionForLayerType(acao, "Adicionar", vector, True), e o
+      QGIS nao mesclava essas 6 chamadas num unico submenu. Corrigido
+      construindo um QMenu("Adicionar") proprio, com as 6 acoes como
+      filhas diretas dele (API nativa do Qt), registrado uma unica vez.
+      Nenhuma outra parte da interface foi alterada: textos, icones,
+      callbacks, parametros e ordem das 6 opcoes sao exatamente os mesmos
+      de antes; o submenu "Ferramentas Terra" categorizado (0.17.0) e o
+      restante do plugin nao foram tocados.
+    0.17.0
+    - Auditoria e reorganizacao de interface (menu de contexto, barra de
+      ferramentas e identidade visual), sem remover nem alterar nenhuma
+      funcionalidade ja existente:
+    - Menu de contexto da camada: as 12 acoes de lugar que ficavam soltas
+      na raiz (Editar, Estilo, Buffer, Uniao, Divisao, Recortar,
+      Diferenca, Salvar como, Enviar por e-mail etc.) agora ficam dentro
+      de UM submenu "Ferramentas Terra", organizado por categoria
+      (GEOPROCESSAMENTO, MEDICOES, VALIDACAO, EXPORTACAO) com rotulos de
+      secao. Excluir continua na raiz, fora do submeno, por ser
+      destrutiva. Nenhuma acao foi removida ou teve o calculo alterado -
+      so a organizacao visual.
+    - Novas acoes no menu de contexto: "Calcular medidas..." (abre a
+      Calculadora ja no lugar clicado), "Validar geometria..." (abre o
+      Validador ja com o lugar marcado) e "Exportar mapa..." (abre a
+      Exportacao de mapas ja com a extensao ajustada ao lugar) - as tres
+      reaproveitam as janelas que ja existiam no menu Vetor, sem duplicar
+      logica de calculo/validacao/exportacao.
+    - Barra de ferramentas: 4 botoes novos (Desenhar circulo - abre a
+      Regua na aba Circulo; Calculadora de area e distancia; Gerenciar
+      estilos; Exportar mapa) e a acao nativa "Selecionar feicoes" do
+      proprio QGIS passou a tambem aparecer aqui (mesmo QAction, sem
+      reimplementacao). Calculadora e Exportar mapa, que antes so tinham
+      entrada no menu Vetor, agora tambem tem botao na barra - sem ficar
+      duplicadas no menu.
+    - Novo painel lateral "Ferramentas Terra - Propriedades" (ancoravel,
+      com mostrar/ocultar pelo menu Vetor): mostra nome, tipo, area,
+      perimetro/comprimento, SRC e situacao da validacao do lugar
+      selecionado no painel Camadas, sempre lidos da geometria real (as
+      mesmas funcoes de medicao da Calculadora/Exportar mapa) e
+      atualizados ao trocar a selecao ou editar/estilizar o proprio
+      lugar. Os botoes do painel (Calcular medidas, Alterar estilo,
+      Validar geometria, Exportar geometria) delegam para o codigo ja
+      existente, sem nenhuma logica nova de calculo/estilo/validacao/
+      exportacao.
+    - 4 icones novos (circulo, calculadora, paleta de estilo, exportar
+      mapa), no mesmo estilo visual dos icones existentes.
+    0.16.0
+    - Auditoria e implementacao de 4 funcionalidades (Calculadora,
+      Estilos, Validador de geometrias, Exportacao de mapas):
+    - Correcao de bug real encontrado na auditoria: o estilo de um lugar
+      so persistia se o PROJETO fosse salvo e reaberto - checagem de
+      capacidade do provedor usava "in" sobre um tipo que nao e'
+      container nesse binding do QGIS, levantando TypeError engolido em
+      silencio pelo except. Corrigido com checagem bit a bit ("&");
+      confirmado que o estilo agora sobrevive a reabrir a camada do
+      GeoPackage sem nenhum projeto.
+    - Nova Calculadora de area e distancia: consulta um lugar JA SALVO
+      (sem precisar editar), com troca de unidade e botao "Copiar
+      resultado". Diametro adicionado ao Circulo da Regua.
+    - Novo Gerenciador de Estilos: aplica em 1+ lugares de uma vez,
+      biblioteca de presets nomeados (QSettings, reutilizavel entre
+      projetos).
+    - Novo Validador de geometrias: geometria invalida/vazia, vertices
+      duplicados, anel nao fechado, fora de uma extensao de referencia e
+      sobreposicao entre poligonos (quando pedida). Correcao automatica
+      (makeValid) sempre cria uma COPIA nova, nunca sobrescreve o
+      original, sempre com confirmacao.
+    - Nova Exportacao de mapas: layout real do QGIS (QgsPrintLayout) com
+      titulo, SRC, area/perimetro, legenda, escala, seta de norte;
+      formatos A4/A3, retrato/paisagem; exporta PDF e PNG reais;
+      pre-visualizacao abre o Layout Designer nativo do QGIS.
+    0.15.0
+    - Fase F do Projeto Mestre: geoprocessamento integrado, via algoritmos
+      nativos do QGIS Processing (nunca reimplementados):
+    - Gerar Buffer... (native:buffer): distancia (aceita negativo, para
+      encolher poligonos), unidade, numero de segmentos, SRC de
+      processamento (rejeita SRC geografico com aviso claro) e de saida
+      (independentes, com reprojecao efetiva), dissolver 2+ resultados,
+      estilo, pasta de destino. Funciona em marcador, caminho ou
+      poligono, inclusive varios ao mesmo tempo.
+    - Unir poligonos... (QgsGeometry.unaryUnion): combina 2+ poligonos
+      numa unica geometria.
+    - Dividir poligono... (native:splitwithlines): corta um poligono com
+      uma linha desenhada no mapa; pre-visualiza antes de confirmar; o
+      original so e' apagado depois das partes serem gravadas com
+      sucesso; avisa quando a linha nao atravessa de verdade.
+    - Recortar com... (native:clip) e Diferenca... (native:difference):
+      mantem a parte dentro da mascara, ou a parte fora da outra
+      geometria, respectivamente.
+    - Todas as operacoes preservam as camadas de origem (exceto a
+      divisao, que remove o original so apos confirmar e gravar as
+      partes com sucesso) - o resultado e' sempre um lugar novo.
+    0.14.1
+    - Correcao critica relatada pelo usuario apos testar a 0.14.0 no QGIS
+      3.44.15: o Circulo continuava desenhando so a linha do raio e a
+      Area aparecia como NaN; a janela "Novo Caminho" continuava sem
+      opcao de SRC/CRS.
+    - Causa raiz CONFIRMADA EMPIRICAMENTE contra o QGIS 3.44.15 real (ha
+      uma instalacao local): QgsDistanceArea.computeSpheroidProject()
+      devolve (nan, nan) SILENCIOSAMENTE - sem lancar excecao - quando o
+      SRC de origem e' projetado (ex.: SIRGAS 2000/UTM, o caso comum no
+      Brasil). Corrigido projetando sempre em WGS84 internamente e
+      transformando o anel/ponto de volta para o SRC de origem. A mesma
+      causa raiz foi encontrada e corrigida em project_point() (usada
+      por "Adicionar por medida" em Novo Caminho/Novo Poligono).
+    - Nova opcao "SRC/CRS da camada de saida" na janela Novo Caminho
+      (antes so existia na aba Caminho da Regua): comeca no SRC do
+      projeto, reprojeta de verdade as coordenadas (nao so a etiqueta do
+      SRC) ao escolher outro sistema, e grava a camada ja nesse SRC.
+    - Testes automatizados agora executados de verdade contra uma
+      instalacao real do QGIS 3.44.15 (nao so escritos) - 136 testes
+      passando.
+    0.14.0
+    - Reescopo priorizando desenho, medicao e geoprocessamento (estilo
+      Google Earth Pro mais proximo de ferramentas de campo/CAD do que de
+      um visualizador de imagens):
+    - SUSPENSO: historico de imagens de satelite Sentinel-2/Landsat
+      (disponivel nas versoes 0.12.0 a 0.13.1). Codigo preservado no
+      historico do Git (branch feature/historico-imagens-suspenso) para
+      retomada futura, se decidido - nao foi apagado, so retirado da
+      interface e do empacotamento.
+    - Regua > aba Caminho: novo seletor de SRC/CRS, igual ao seletor
+      nativo das ferramentas de Processamento (ex.: Buffer). Comeca no
+      SRC do projeto; ao trocar, o caminho salvo grava a tabela do
+      GeoPackage nesse SRC (nao mais sempre em WGS84), para abrir pronto
+      no Buffer com distancia em metros. Linha, Poligono e Circulo nao
+      tem este seletor e continuam gravando em WGS84, como sempre.
+    - Corrigido o desenho do Circulo: a circunferencia completa as vezes
+      nao aparecia (so a linha pontilhada do raio) porque o calculo do
+      anel usava o SRC do projeto em vez do SRC do canvas/mapa e
+      descartava o anel inteiro na primeira falha de projecao de um unico
+      segmento. Agora cada segmento e tentado de forma independente e o
+      circulo nunca mais cai de volta para desenhar so o raio.
+    - Regua: removidas as abas "Caminho em 3D" e "Poligono em 3D" (eram
+      so um placeholder desativado, sem logica de medicao real).
+    - Barra principal: removidos os botoes "Tela cheia" (continua pelo
+      menu nativo Ver > Tela cheia do QGIS) e "Pesquisar lugares" (so
+      buscava entre lugares criados pelo proprio plugin).
+    0.13.1
+    - Correcao critica relatada pelo usuario apos validacao manual da 0.13.0:
+      a busca so trazia a primeira pagina de resultados do catalogo STAC (no
+      maximo as ~30 cenas mais recentes) - por isso so o ano mais recente
+      aparecia disponivel na linha do tempo. Agora pagina automaticamente
+      (confirmado contra o servico real), ate 1000 cenas por busca.
+    - Cada cena tem a colecao (sensor) conferida contra a fonte pedida antes
+      de entrar na lista e de novo antes de carregar - corrige um produto
+      Sentinel-1 (radar) aparecer rotulado como Landsat (optico), o que
+      travava o carregamento com "esta cena nao tem bandas RGB suficientes".
+    - Cache de busca versionado: qualquer arquivo de cache gravado por uma
+      versao anterior (potencialmente incompleto/contaminado) e descartado
+      automaticamente, sem precisar apagar nada a mao.
+    0.13.0
+    - Correcao da causa raiz do historico de imagens relatada apos a 0.12.0:
+      a busca aceitava cenas que so TOCAVAM a area pesquisada (interseccao
+      de bbox, nao contencao) - o usuario via, na maior parte da tela, o
+      fundo do canvas fora da extensao do raster, e confundia isso com
+      "imagem cinza"/"imagem que nao aparece". A lista agora mostra a
+      cobertura real da area pesquisada para cada cena, sem nunca escondela.
+    - Segunda causa da "imagem cinza": a composicao de bandas brutas
+      (Landsat, e Sentinel-2 quando a cena nao tem o asset RGB pronto) nao
+      declarava NoData nem aplicava realce de contraste - agora declara
+      NoData=0 no VRT e aplica o mesmo corte cumulativo 2%%-98%% que o QGIS
+      faria manualmente em Propriedades > Estilo.
+    - Extensao do mapa convertida para a busca por retangulo envolvente de
+      verdade (QgsCoordinateTransform.transformBoundingBox), nao só pelos
+      dois cantos opostos - mais preciso em SRC projetado (SIRGAS/UTM).
+    - Nova linha do tempo anual (estilo Google Earth Pro): anos reais com/
+      sem aquisicao numa trilha horizontal (nunca finge disponibilidade),
+      navegacao entre anos e aquisicoes sem voltar a tela de busca, pulando
+      por cima de anos sem dado.
+    - A imagem "atual" no mapa so e trocada depois de a nova camada ser
+      validada, preservando o enquadramento do canvas; falha ao carregar
+      preserva a ultima imagem valida. Resposta de uma busca antiga nunca
+      mais sobrescreve o resultado de uma busca mais nova.
+    - Importar/Exportar KML/KMZ saem da barra principal (menos botoes) e
+      ganham atalho no botao direito de uma pasta no painel Camadas,
+      incluindo "Exportar propriedade completa" a partir de uma subpasta.
+    0.12.0
+    - Fase E do plano Google Earth Pro: imagens de satelite e historico
+      temporal.
+    - Busca de Sentinel-2 e Landsat via Earth Search (Element84/AWS Open
+      Data), catalogo STAC publico e sem autenticacao - confirmado contra
+      o servico real durante o desenvolvimento, nao presumido.
+    - Area por extensao do mapa ou feicao selecionada; periodo de datas;
+      lista com data de aquisicao, data de publicacao do produto,
+      satelite, resolucao e cobertura de nuvens ("Nao informado" quando a
+      fonte nao traz o dado, nunca inventado).
+    - Carrega a cena em cores naturais RGB direto do arquivo remoto (sem
+      baixar o arquivo inteiro). Landsat compoe as 3 bandas via VRT.
+    - Comparacao simples entre duas datas (Anterior/Posterior) com
+      alternancia de visibilidade; aponta para a ferramenta nativa de
+      mapa comparativo do QGIS para um slider, em vez de reimplementa-la.
+    - Consulta assincrona (nao trava o canvas), cancelavel. Cache so de
+      metadados de busca, nunca das imagens; botao para limpar.
+    - Sem conexao, so esta janela e afetada - desenho, edicao, regua e
+      lugares salvos continuam funcionando.
+    0.11.1
+    - Correcao critica: exportar pasta/propriedade para KML/KMZ gerava
+      arquivo vazio (ou "nada para exportar") quando os lugares nunca
+      tinham sido explicitamente movidos pelo menu ou o projeto nunca
+      tinha sido salvo. A exportacao agora le a arvore de camadas visivel
+      diretamente, em vez de depender so da tabela de cache de pastas.
+    - A exclusao de erro agora distingue pasta invalida, pasta realmente
+      vazia e falha de leitura - nunca mais mascarada como "vazio".
+    - Exportar uma feicao individual nao foi afetado por este defeito e
+      continua igual.
+    0.11.0
+    - Fase D do plano Google Earth Pro: importacao e exportacao KML/KMZ.
+    - Novo leitor/escritor KML/KMZ proprio (kml_io.py), sem depender do
+      driver OGR do GDAL - preserva hierarquia de pastas, nome, descricao
+      e estilo (cor/largura) nos dois sentidos.
+    - Importar KML/KMZ: marcador, caminho, poligono (com aneis internos),
+      pastas aninhadas, selecao de elementos, pasta de destino (existente
+      ou nova), deteccao de ja-importado (nao duplica ao reimportar o
+      mesmo arquivo), relatorio de elementos nao suportados.
+    - MultiGeometry do KML vira varios lugares separados na importacao
+      (a arquitetura de 1 geometria por lugar nao foi alterada).
+    - Exportar pasta (com subpastas) ou tudo para KML/KMZ. Exportar um
+      lugar individual (Salvar lugar como/Enviar por e-mail) passou a usar
+      o mesmo escritor, agora tambem aceitando KMZ.
+    - Nao promete equivalencia visual completa com o Google Earth
+      (icones personalizados, por exemplo) - documentado no LEIAME.
+    0.10.0
+    - Fase C do plano Google Earth Pro: desenho avancado.
+    - Aderencia a vertices/segmentos de qualquer camada, usando o motor
+      nativo do QGIS numa instancia propria (nao altera a configuracao
+      global de snapping do projeto). Tolerancia em pixels, configuravel e
+      desativavel na interface. Nao se aplica ao circulo nem a Regua.
+    - Entrada numerica de vertice (aba "Adicionar por medida"): distancia e
+      azimute (mesma convencao de rumo da Regua) ou coordenadas, passando
+      pelo mesmo caminho de um clique real - undo, medidas, gravacao.
+    - Destaque visual do vertice em arraste tambem na edicao de lugar
+      existente (ja existia na criacao desde a 0.7.0).
+    - Auditoria de desfazer/refazer: confirmado que cobre vertice (inserir/
+      mover/apagar) na criacao e na edicao com gravacao real no GeoPackage;
+      documentado que NAO cobre desfazer criacao/exclusao de uma feicao
+      inteira (fora do escopo desta fase).
+    0.9.0
+    - Fase B do plano Google Earth Pro: organizacao de lugares em pastas e
+      subpastas persistentes, guardadas no proprio GeoPackage (nao so no
+      projeto QGIS), entao sobrevivem mesmo sem salvar o projeto.
+    - Criar/renomear/excluir pasta; mover lugar entre pastas pelo menu
+      "Mover para pasta..." ou por arrastar-e-soltar nativo do QGIS.
+    - Mostrar/ocultar pasta inteira (recurso nativo do QGIS, aplicado aos
+      lugares dentro dela).
+    - Modelo reutilizavel de propriedade rural (Sede, Area do Imovel, APP,
+      Reserva Legal, Nascentes, Outros).
+    - Pesquisa de lugares por nome com navegacao direta até a feicao.
+    - Exclusao de pasta agora tambem limpa o registro de pastas/subpastas no
+      GeoPackage, para nao deixar dado orfao.
+    0.8.0
+    - Fase A do plano Google Earth Pro: desfazer/refazer (Ctrl+Z/Ctrl+Y) para
+      adicionar, mover e apagar vertices, tanto na criacao quanto na edicao
+      de um lugar existente (regrava o GeoPackage a cada passo).
+    - Novo botao "Ir para coordenadas" (digita lat/lon e centraliza o mapa).
+    - Nova acao "Ir para" no menu de lugares, que amplia o mapa até a feicao
+      selecionada usando o zoom nativo do QGIS.
+    - Novo botao de tela cheia na barra, reaproveitando o recurso nativo do
+      QGIS (View > Tela cheia) em vez de um modo proprio.
+    - Diagnostico: falhas de gravacao/exclusao agora tambem ficam registradas
+      no painel nativo "Mensagens de registro" do QGIS, alem do aviso na
+      tela, para investigacao posterior.
+    0.7.0
+    - Durante a criacao de caminhos e poligonos, agora e possivel selecionar,
+      arrastar e apagar um vertice individual sem reiniciar o desenho.
+    - A exclusao de vertices (na criacao e na edicao) passa a considerar
+      vertices distintos, nao so a contagem de cliques, e bloqueia a
+      operacao com aviso quando isso deixaria a geometria invalida.
+    - Corrigidas falhas silenciosas de gravacao: renomear, salvar descricao
+      e mover vertice de um lugar existente agora avisam o usuario quando a
+      gravacao no GeoPackage falha, em vez de dar falso sucesso.
+    - A exclusao de lugares agora confirma se a tabela foi mesmo removida do
+      GeoPackage e avisa quando ela nao pode ser apagada do arquivo.
+    0.6.0
+    - Versao anterior.

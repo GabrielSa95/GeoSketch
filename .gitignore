@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Configuração local / segredos
+.env
+*.local
+
+# Logs
+*.log
+
+# Dados de usuário / bancos de teste (nunca devem entrar no repositório)
+*.gpkg
+*.sqlite
+*.sqlite3
+*.db
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Imagem de origem do ícone (não usada pelo plugin, mantida apenas localmente)
+Blob azul-turquesa translúcido e brilhante.png
